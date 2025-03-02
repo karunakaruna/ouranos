@@ -53,19 +53,23 @@ export default function TagPicker(props: Props) {
 
   return (
     <Dialog.Root open={showTagPicker} onOpenChange={setShowTagPicker}>
-      <Dialog.Trigger>
+      <Dialog.Trigger asChild>
         <Button className="p-0">
           <BiHash className="text-2xl text-primary hover:text-primary-dark" />
         </Button>
       </Dialog.Trigger>
       <Dialog.Portal>
-        <Dialog.Content>
+        <Dialog.Overlay className="animate-fade animate-duration-200 bg-skin-overlay-muted fixed inset-0 z-50" />
+        <Dialog.Content
+          className="fixed inset-0 z-50 flex items-center justify-center"
+          aria-describedby="tag-picker-description"
+        >
           <section className="max-h-screen overflow-auto animate-fade-up animate-duration-200 bg-skin-base border-skin-base fixed bottom-0 z-50 flex h-fit w-full flex-col justify-between rounded-t-3xl p-3 pb-16 shadow-2xl border-t">
-            <h2 className="text-skin-base mb-2 text-center text-xl font-semibold">
+            <Dialog.Title className="text-skin-base mb-2 text-center text-xl font-semibold">
               Add tags
-            </h2>
-            <div className="flex  flex-col gap-1 md:max-w-2xl w-full md:mx-auto">
-              <Label htmlFor="tags">
+            </Dialog.Title>
+            <div className="flex flex-col gap-1 md:max-w-2xl w-full md:mx-auto">
+              <Label htmlFor="tags" id="tag-picker-description">
                 Press enter to add a tag (limit is 8 tags)
               </Label>
               <Input

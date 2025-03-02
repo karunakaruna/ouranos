@@ -69,16 +69,16 @@ export default function PostActions(props: Props) {
     return (
       <div>
         {(likeCount > 0 || repostCount > 0) && (
-          <div className="border-skin-base mt-3 flex flex-wrap items-center gap-3 border-y py-2">
+          <div className="border-skin-base mt-2 flex flex-wrap items-center gap-2 border-y py-1.5">
             {repostCount > 0 && (
               <Link
                 href={`/dashboard/user/${post.author.handle}/post/${getPostId(
                   post.uri
                 )}/reposted-by`}
-                className="text-skin-base flex gap-1 font-semibold"
+                className="text-skin-base flex gap-0.5 font-medium"
               >
                 {abbreviateNumber(repostCount)}
-                <span className="text-skin-tertiary font-medium">
+                <span className="text-skin-tertiary font-normal">
                   Repost{repostCount > 1 && "s"}
                 </span>
               </Link>
@@ -88,10 +88,10 @@ export default function PostActions(props: Props) {
                 href={`/dashboard/user/${post.author.handle}/post/${getPostId(
                   post.uri
                 )}/quotes`}
-                className="text-skin-base flex gap-1 font-semibold"
+                className="text-skin-base flex gap-0.5 font-medium"
               >
                 {abbreviateNumber(quoteCount)}
-                <span className="text-skin-tertiary font-medium">
+                <span className="text-skin-tertiary font-normal">
                   Quote{quoteCount > 1 && "s"}
                 </span>
               </Link>
@@ -101,17 +101,17 @@ export default function PostActions(props: Props) {
                 href={`/dashboard/user/${post.author.handle}/post/${getPostId(
                   post.uri
                 )}/liked-by`}
-                className="text-skin-base flex gap-1 font-semibold"
+                className="text-skin-base flex gap-0.5 font-medium"
               >
                 {abbreviateNumber(likeCount)}
-                <span className="text-skin-tertiary font-medium">
+                <span className="text-skin-tertiary font-normal">
                   Like{likeCount > 1 && "s"}
                 </span>
               </Link>
             )}
           </div>
         )}
-        <div className="mt-3 flex justify-between">
+        <div className="mt-2 flex justify-between">
           <Button
             disabled={post.viewer?.replyDisabled}
             onClick={(e) => {
@@ -131,7 +131,7 @@ export default function PostActions(props: Props) {
             }}
             className="hover:text-primary text-skin-icon-muted"
           >
-            <BiMessageRounded className="text-xl" />
+            <BiMessageRounded className="text-lg" />
           </Button>
           <Dropdown>
             <Dropdown.Trigger>
@@ -145,7 +145,7 @@ export default function PostActions(props: Props) {
                     : "text-skin-icon-muted hover:text-skin-icon-repost"
                 }
               >
-                <BiRepost className="text-2xl" />
+                <BiRepost className="text-lg" />
               </Button>
             </Dropdown.Trigger>
             <Dropdown.Menu>
@@ -190,9 +190,9 @@ export default function PostActions(props: Props) {
             }
           >
             {liked ? (
-              <BiSolidHeart className="text-xl" />
+              <BiSolidHeart className="text-lg" />
             ) : (
-              <BiHeart className="text-xl" />
+              <BiHeart className="text-lg" />
             )}
           </Button>
           <Dropdown>
@@ -203,7 +203,7 @@ export default function PostActions(props: Props) {
                 }}
                 className="text-skin-icon-muted hover:text-skin-base"
               >
-                <BiDotsHorizontalRounded className="text-xl" />
+                <BiDotsHorizontalRounded className="text-lg" />
               </Button>
             </Dropdown.Trigger>
             <Dropdown.Menu>
@@ -290,7 +290,7 @@ export default function PostActions(props: Props) {
               }
             `}
           >
-            <BiRepost className="text-xl" />
+            <BiRepost className="text-lg" />
             {repostCount > 0 && abbreviateNumber(repostCount)}
           </Button>
         </Dropdown.Trigger>

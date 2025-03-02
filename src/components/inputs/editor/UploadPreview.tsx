@@ -41,10 +41,11 @@ export default function UploadPreview(props: Props) {
             </Button>
             <div className="absolute bottom-0 m-2">
               <Dialog.Root open={showAltTextModal}>
-                <Dialog.Trigger>
+                <Dialog.Trigger asChild>
                   <Button
                     className="text-skin-secondary bg-skin-secondary hover:bg-skin-muted border border-skin-base hover:text-skin-base rounded-full px-3 py-2 text-sm font-medium"
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.stopPropagation();
                       setSelectedImage(image);
                       setShowAltTextModal(true);
                       setAltText(image.altText ?? "");
@@ -54,10 +55,17 @@ export default function UploadPreview(props: Props) {
                   </Button>
                 </Dialog.Trigger>
                 <Dialog.Portal>
-                  <Dialog.Content>
+                  <Dialog.Overlay className="animate-fade animate-duration-200 bg-skin-overlay-muted fixed inset-0 z-50" />
+                  <Dialog.Content
+                    className="fixed inset-0 z-50 flex items-center justify-center"
+                    aria-describedby="alt-text-description"
+                  >
                     {selectedImage && (
                       <section className="animate-fade-up animate-duration-200 bg-skin-base border-skin-base fixed bottom-0 z-50 flex h-full w-full flex-col justify-between overflow-scroll rounded-t-3xl p-3 shadow-2xl md:h-fit md:border-t">
                         <div>
+                          <Dialog.Title className="text-skin-base mb-2 text-center text-xl font-semibold">
+                            Image Alt Text
+                          </Dialog.Title>
                           <Image
                             src={selectedImage.url}
                             alt="Uploaded image"
@@ -67,7 +75,7 @@ export default function UploadPreview(props: Props) {
                           />
                           <div className="mx-auto mt-3 flex items-center gap-2 md:max-w-xl">
                             <PiWarningCircleFill className="text-skin-base shrink-0 text-2xl" />
-                            <small className="text-skin-secondary">
+                            <small id="alt-text-description" className="text-skin-secondary">
                               Alt text describes images for users with
                               disabilities and helps give context to everyone.
                             </small>

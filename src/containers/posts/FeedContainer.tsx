@@ -11,6 +11,8 @@ import Refetch from "@/components/actions/refetch/Refetch";
 import ComposeButton from "@/components/actions/composeButton/ComposeButton";
 import LoadingSpinner from "@/components/status/loadingSpinner/LoadingSpinner";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { useStats } from "@/app/providers/stats";
+import { useEffect, useMemo } from "react";
 
 interface Props {
   feed: string;
@@ -19,6 +21,8 @@ interface Props {
 
 export default function FeedContainer(props: Props) {
   const { feed, mode } = props;
+  const { incrementPostCount, resetPostCount } = useStats();
+  
   const {
     refetchFeed,
     feedStatus,
@@ -42,6 +46,36 @@ export default function FeedContainer(props: Props) {
     (acc, page) => acc + (page?.data.feed?.length ?? 0),
     0
   );
+
+  // Calculate total visible posts (after filtering)
+  const visiblePosts = useMemo(() => {
+    if (!feedData || !feedFilter) return 0;
+    
+    return feedData.pages.reduce((total, page) => {
+      if (!page?.data.feed) return total;
+      
+      const filteredCount = feed === "timeline" 
+        ? page.data.feed.filter(f => filterFeed(f, feedFilter)).length
+        : page.data.feed.length;
+        
+      return total + filteredCount;
+    }, 0);
+  }, [feedData, feedFilter, feed]);
+
+  // Update post count in stats context
+  useEffect(() => {
+    resetPostCount();
+    if (visiblePosts > 0) {
+      incrementPostCount(visiblePosts);
+    }
+  }, [visiblePosts, resetPostCount, incrementPostCount]);
+
+  // Reset post count when component unmounts
+  useEffect(() => {
+    return () => {
+      resetPostCount();
+    };
+  }, [resetPostCount]);
 
   const isEmpty =
     !isFetchingFeed && !isFetchingFeedNextPage && dataLength === 0;

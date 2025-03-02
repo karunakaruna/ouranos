@@ -18,7 +18,7 @@ export default function Avatar(props: Props) {
       width={width}
       height={height}
       priority
-      className={`rounded-full ${className}`}
+      className={`rounded-futuristic ${className}`}
     />
   );
 }

@@ -1,0 +1,4 @@
+Create a file named .env.local in the ouranos directory with the following content:
+
+NEXTAUTH_SECRET=9DnAa7sXD+39x8V6KETNu+Q4Icj/rFpIqc23200Sat8=
+NEXTAUTH_URL=http://localhost:3000

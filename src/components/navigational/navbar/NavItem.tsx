@@ -1,34 +1,48 @@
+"use client";
+
 import Badge from "@/components/feedback/badge/Badge";
 import Link from "next/link";
-import { ReactElement } from "react";
+import { ReactNode } from "react";
 
-interface Props {
+interface NavItemProps {
   href: string;
-  icon: ReactElement;
-  title?: string;
-  activeIcon?: ReactElement;
-  isActive?: boolean;
+  icon: ReactNode;
+  activeIcon: ReactNode;
+  title: string;
+  isActive: boolean;
   badge?: number;
+  collapsed?: boolean;
 }
 
-export default function NavItem(props: Props) {
-  const { href, title, icon, activeIcon, isActive, badge } = props;
+export default function NavItem({
+  href,
+  icon,
+  activeIcon,
+  title,
+  isActive,
+  badge,
+  collapsed = false,
+}: NavItemProps) {
   return (
     <Link
       href={href}
-      className={`hover:text-skin-base flex items-center ${
-        isActive ? "text-skin-base" : "text-skin-secondary"
-      } ${title && "gap-3"}`}
+      className={`flex items-center gap-2 p-2 ${
+        collapsed ? 'justify-center w-full' : 'px-3'
+      } ${
+        isActive
+          ? "text-skin-accent"
+          : "text-skin-tertiary hover:text-skin-base"
+      }`}
     >
-      <div className="relative m-2 md:m-0">
+      <div className="relative">
         {isActive ? activeIcon : icon}
-        {badge !== undefined && badge > 0 && (
-          <Badge variant="overlay" position="topRight">
-            {badge}
-          </Badge>
-        )}
+        {badge ? (
+          <div className="absolute -top-1 -right-1">
+            <Badge>{badge}</Badge>
+          </div>
+        ) : null}
       </div>
-      <span className={`hidden text-lg font-medium lg:inline`}>{title}</span>
+      {!collapsed && <span className="text-sm">{title}</span>}
     </Link>
   );
 }

@@ -15,7 +15,7 @@ export default function TopBar(props: Props) {
   const { profile } = props;
 
   return (
-    <div className="bg-skin-base border-skin-base sticky top-0 z-[60] flex items-center justify-between border-b px-3 py-2.5 transition-all ease-linear md:hidden">
+    <div className="bg-skin-base border-skin-base sticky top-0 z-[60] flex items-center justify-between border-b px-2.5 py-2 transition-all ease-linear md:hidden">
       <Link
         href={`/dashboard/user/${profile?.handle}`}
         className="hover:brightness-90"
@@ -33,20 +33,20 @@ export default function TopBar(props: Props) {
           <Image
             src="/ouranos.svg"
             alt="Ouranos logo"
-            width={30}
-            height={30}
+            width={25}
+            height={25}
             className="block transition-transform duration-700 ease-in-out group-hover:rotate-180"
           />
           <Image
             src="/ouranosText.svg"
             alt="Ouranos text"
-            width={60}
-            height={20}
+            width={50}
+            height={17}
           />
         </div>{" "}
       </Button>
       <Link href="/dashboard/settings">
-        <BiCog className="text-skin-icon-muted hover:text-skin-icon-base text-2xl md:text-3xl" />
+        <BiCog className="text-skin-icon-muted hover:text-skin-icon-base text-xl md:text-2xl" />
       </Link>
     </div>
   );

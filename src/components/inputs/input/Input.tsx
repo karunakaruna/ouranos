@@ -16,8 +16,8 @@ export default function Input(props: Props) {
       <input
         {...props}
         className={`${
-          icon ? "mt-1 pl-8 pr-4" : "px-4"
-        } border-skin-base outline-offset-0 outline-2 outline-transparent focus:outline-skin-base focus:outline active:outline-2 hover:outline-skin-base/50 hover:outline  focus:bg-skin-tertiary text-skin-base placeholder:text-skin-secondary bg-skin-secondary peer block w-full rounded-xl border py-2.5 text-sm hover:bg-skin-tertiary/80
+          icon ? "mt-1 pl-8 pr-4" : "px-3"
+        } border-skin-base outline-offset-0 outline-1 outline-transparent focus:outline-skin-base focus:outline active:outline-1 hover:outline-skin-base/50 hover:outline focus:bg-skin-tertiary text-skin-base placeholder:text-skin-secondary bg-skin-secondary peer block w-full border py-2 text-sm hover:bg-skin-tertiary/80
 `}
       />
     </div>

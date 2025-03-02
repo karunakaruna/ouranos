@@ -18,7 +18,11 @@ import { getUnreadNotificationsCount } from "@/lib/api/bsky/notification";
 import { useQuery } from "@tanstack/react-query";
 import { useAgent } from "@/app/providers/agent";
 
-export default function Navbar() {
+interface NavbarProps {
+  collapsed?: boolean;
+}
+
+export default function Navbar({ collapsed = false }: NavbarProps) {
   const agent = useAgent();
   const pathname = usePathname();
 
@@ -35,49 +39,55 @@ export default function Navbar() {
   });
 
   return (
-    <nav className="inline-flex flex-col gap-5 lg:ml-1.5">
+    <nav className={`inline-flex flex-col gap-4 ${collapsed ? 'items-center' : 'items-start'} w-full`}>
       <NavItem
         href="/dashboard/home"
-        icon={<BiHome className="text-2xl md:text-3xl" />}
-        activeIcon={<BiSolidHome className="text-2xl md:text-3xl" />}
+        icon={<BiHome className="text-xl" />}
+        activeIcon={<BiSolidHome className="text-xl" />}
         title="Home"
         isActive={pathname === "/dashboard/home"}
+        collapsed={collapsed}
       />
       <NavItem
         href="/dashboard/search"
-        icon={<PiMagnifyingGlassBold className="text-2xl md:text-3xl" />}
-        activeIcon={<PiMagnifyingGlassFill className="text-2xl md:text-3xl" />}
+        icon={<PiMagnifyingGlassBold className="text-xl" />}
+        activeIcon={<PiMagnifyingGlassFill className="text-xl" />}
         title="Search"
         isActive={pathname.includes("search")}
+        collapsed={collapsed}
       />
       <NavItem
         href="/dashboard/feeds"
-        icon={<BiPlanet className="text-2xl md:text-3xl" />}
-        activeIcon={<BiSolidPlanet className="text-2xl md:text-3xl" />}
+        icon={<BiPlanet className="text-xl" />}
+        activeIcon={<BiSolidPlanet className="text-xl" />}
         title="Feeds"
         isActive={pathname === "/dashboard/feeds"}
+        collapsed={collapsed}
       />
       <NavItem
         href="/dashboard/lists"
-        icon={<HiOutlineClipboardList className="text-2xl md:text-3xl" />}
-        activeIcon={<HiClipboardList className="text-2xl md:text-3xl" />}
+        icon={<HiOutlineClipboardList className="text-xl" />}
+        activeIcon={<HiClipboardList className="text-xl" />}
         title="Lists"
         isActive={pathname === "/dashboard/lists"}
+        collapsed={collapsed}
       />
       <NavItem
         href="/dashboard/notifications"
-        icon={<FaRegBell className="text-2xl md:text-3xl" />}
-        activeIcon={<FaBell className="text-2xl md:text-3xl" />}
+        icon={<FaRegBell className="text-xl" />}
+        activeIcon={<FaBell className="text-xl" />}
         title="Notifications"
         isActive={pathname.includes("notifications")}
         badge={notificationsCount ?? 0}
+        collapsed={collapsed}
       />
       <NavItem
         href="/dashboard/settings"
-        icon={<BiCog className="text-2xl md:text-3xl" />}
-        activeIcon={<BiSolidCog className="text-2xl md:text-3xl" />}
+        icon={<BiCog className="text-xl" />}
+        activeIcon={<BiSolidCog className="text-xl" />}
         title="Settings"
         isActive={pathname.includes("settings")}
+        collapsed={collapsed}
       />
     </nav>
   );

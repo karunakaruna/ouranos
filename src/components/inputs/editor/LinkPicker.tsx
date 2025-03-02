@@ -49,7 +49,7 @@ export default function LinkPicker(props: Props) {
 
   return (
     <Dialog.Root open={showLinkPicker} onOpenChange={setShowLinkPicker}>
-      <Dialog.Trigger>
+      <Dialog.Trigger asChild>
         <Button
           disabled={!editor.isActive("link") && selection.empty}
           onClick={(e) => {
@@ -71,12 +71,17 @@ export default function LinkPicker(props: Props) {
         </Button>
       </Dialog.Trigger>
       <Dialog.Portal>
-        <Dialog.Content>
+        <Dialog.Overlay className="animate-fade animate-duration-200 bg-skin-overlay-muted fixed inset-0 z-50" />
+        <Dialog.Content
+          className="fixed inset-0 z-50 flex items-center justify-center"
+          aria-describedby="link-picker-description"
+        >
           <section className="animate-fade-up animate-duration-200 bg-skin-base border-skin-base fixed bottom-0 z-50 flex h-fit w-full flex-col justify-between overflow-scroll rounded-t-3xl p-3 pb-16 shadow-2xl border-t no-scrollbar">
-            <h2 className="text-skin-base mb-2 text-center text-xl font-semibold">
+            <Dialog.Title className="text-skin-base mb-2 text-center text-xl font-semibold">
               Add a link
-            </h2>
+            </Dialog.Title>
             <div className="md:max-w-2xl w-full md:mx-auto">
+              <div id="link-picker-description" className="sr-only">Enter the URL you want to link to</div>
               <Input
                 type="url"
                 placeholder="https://your-link.com"
@@ -89,6 +94,7 @@ export default function LinkPicker(props: Props) {
                   }
                 }}
                 onInput={() => setShowError(false)}
+                aria-describedby="link-picker-description"
               />
 
               {showError && (

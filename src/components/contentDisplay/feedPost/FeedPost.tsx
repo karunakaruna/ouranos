@@ -83,7 +83,7 @@ export default function FeedPost(props: Props) {
           )}`,
         );
       }}
-      className="cursor-pointer hover:bg-skin-secondary p-3"
+      className="cursor-pointer hover:bg-skin-secondary p-2.5"
     >
       {reason && <Reason reason={reason} />}
 
@@ -110,16 +110,16 @@ export default function FeedPost(props: Props) {
               onClick={(e) => {
                 e.stopPropagation();
               }}
-              className="flex gap-1"
+              className="flex gap-0.5"
             >
-              <span className="text-skin-base hover:text-skin-secondary line-clamp-1 max-w-[90%] shrink-0 overflow-ellipsis break-all font-semibold">
+              <span className="text-skin-base hover:text-skin-secondary line-clamp-1 max-w-[90%] shrink-0 overflow-ellipsis break-all font-medium">
                 {author.displayName || author.handle}{" "}
               </span>
-              <span className="text-skin-tertiary line-clamp-1 min-w-[10%] shrink break-all font-medium">
+              <span className="text-skin-tertiary line-clamp-1 min-w-[10%] shrink break-all font-normal">
                 @{author.handle}
               </span>
             </Link>
-            <span className="text-skin-tertiary whitespace-nowrap font-medium">
+            <span className="text-skin-tertiary whitespace-nowrap font-normal">
               &nbsp;· {getRelativeTime(indexedAt)}
             </span>
           </div>

@@ -81,7 +81,12 @@ export default function Gallery(props: Props) {
             onClose();
           }}
           className="z-50 w-full"
+          aria-describedby="gallery-description"
         >
+          <Dialog.Title className="sr-only">Image Gallery</Dialog.Title>
+          <div id="gallery-description" className="sr-only">
+            Image {currentIndex + 1} of {imageCount}. Press left and right arrow keys to navigate.
+          </div>
           <div className="fixed left-3 top-3 z-[70] flex felx-wrap items-center gap-3">
             <Button
               className="text-skin-secondary bg-skin-secondary hover:bg-skin-base hover:text-skin-base rounded-full p-3.5 border border-skin-base"

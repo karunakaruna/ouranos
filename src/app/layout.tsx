@@ -48,7 +48,7 @@ export default async function RootLayout({
         {/* for making the page fullscreen on iOS when added to home */}
         <meta name="mobile-web-app-capable" content="yes" />
       </head>
-      <body className={inter.className}>
+      <body className={`${inter.className} text-futuristic`}>
         <ThemeProvider>
           <SessionProvider session={session}>
             <ScrollProvider>
